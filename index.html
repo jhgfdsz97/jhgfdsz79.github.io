@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شجرة العائلة - من علي بن أبي طالب إلى الجيل الحالي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">🌳 شجرة العائلة الشريفة</h1>
+                <p class="subtitle">من أمير المؤمنين علي بن أبي طالب رضي الله عنه</p>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن اسم في الشجرة...">
+                    <button id="clearSearch" class="clear-btn" style="display: none;">✕</button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </header>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="control-group">
+                <button id="zoomIn" class="control-btn" title="تكبير">🔍 +</button>
+                <button id="zoomOut" class="control-btn" title="تصغير">🔍 -</button>
+                <button id="resetZoom" class="control-btn" title="إعادة تعيين">↺</button>
+            </div>
+            <div class="control-group">
+                <button id="expandAll" class="control-btn" title="توسيع الكل">▼ توسيع الكل</button>
+                <button id="collapseAll" class="control-btn" title="طي الكل">▲ طي الكل</button>
+            </div>
+        </div>
+
+        <!-- Tree Container -->
+        <div class="tree-wrapper">
+            <div id="treeContainer" class="tree-container">
+                <div id="familyTree" class="family-tree"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="stat-item">
+                    <span class="stat-label">عدد الأجيال:</span>
+                    <span class="stat-value">40</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">إجمالي الأفراد:</span>
+                    <span class="stat-value">107</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">الجيل التاسع والثلاثون:</span>
+                    <span class="stat-value">17 فرد</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">الأحفاد:</span>
+                    <span class="stat-value">45 فرد</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
