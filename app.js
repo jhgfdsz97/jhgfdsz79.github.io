@@ -45,7 +45,7 @@ const generationsData = [
     generation: 39,
     members: [
       { name: "هاشم", children: [] },
-      { name: "خاتمة", children: ["عبدالرحمن", { name: "هديل", children: ["راكان", "ملك"] }, "وليد", "فاطمة", "عائشة", "نورة", "رنيم"] }
+      { name: "خاتمة", children: ["عبدالرحمن", { name: "هديل", children: ["راكان", "ملك"] }, "وليد", "فاطمة", "عائشة", "نورة", "رنيم"] },
       { name: "صفية", children: ["عبدالرحمن", "احمد", "ماجدة", "تذكار", "بسام"] },
       { name: "كاملة", children: [] },
       { name: "حسين", children: ["ناصر", "عبدالعزيز", "احمد", "باسمة", "عائشة"] },
@@ -115,17 +115,60 @@ function renderTree() {
           childrenGroup.className = 'children-group';
 
           member.children.forEach(child => {
-            const childNode = document.createElement('div');
-            childNode.className = 'child-node';
-            childNode.textContent = child;
-            childNode.setAttribute('data-name', child);
-            childNode.setAttribute('data-generation', '40');
-            
-            if (searchTerm && child.includes(searchTerm)) {
-              childNode.classList.add('highlighted');
+            // Check if child is a string or object with nested children
+            if (typeof child === 'string') {
+              // Simple child (string)
+              const childNode = document.createElement('div');
+              childNode.className = 'child-node';
+              childNode.textContent = child;
+              childNode.setAttribute('data-name', child);
+              childNode.setAttribute('data-generation', '40');
+
+              if (searchTerm && child.includes(searchTerm)) {
+                childNode.classList.add('highlighted');
+              }
+
+              childrenGroup.appendChild(childNode);
+            } else if (child.name) {
+              // Child with their own children (like هديل)
+              const childNode = document.createElement('div');
+              childNode.className = 'child-node';
+              childNode.textContent = child.name;
+              childNode.setAttribute('data-name', child.name);
+              childNode.setAttribute('data-generation', '40');
+
+              if (searchTerm && child.name.includes(searchTerm)) {
+                childNode.classList.add('highlighted');
+              }
+
+              childrenGroup.appendChild(childNode);
+
+              // Add grandchildren if they exist
+              if (child.children && child.children.length > 0) {
+                const grandchildrenGroup = document.createElement('div');
+                grandchildrenGroup.className = 'children-group';
+                grandchildrenGroup.style.marginRight = '20px';
+                grandchildrenGroup.style.marginTop = '10px';
+
+                child.children.forEach(grandchild => {
+                  const grandchildNode = document.createElement('div');
+                  grandchildNode.className = 'child-node';
+                  grandchildNode.textContent = grandchild;
+                  grandchildNode.setAttribute('data-name', grandchild);
+                  grandchildNode.setAttribute('data-generation', '41');
+                  grandchildNode.style.background = 'linear-gradient(135deg, var(--color-bg-8), var(--color-surface))';
+                  grandchildNode.style.borderColor = 'rgba(6, 182, 212, 0.4)';
+
+                  if (searchTerm && grandchild.includes(searchTerm)) {
+                    grandchildNode.classList.add('highlighted');
+                  }
+
+                  grandchildrenGroup.appendChild(grandchildNode);
+                });
+
+                childrenGroup.appendChild(grandchildrenGroup);
+              }
             }
-            
-            childrenGroup.appendChild(childNode);
           });
 
           parentGroup.appendChild(childrenGroup);
@@ -229,13 +272,13 @@ function applyZoom() {
 // Search functionality
 function handleSearch(value) {
   searchTerm = value.trim();
-  
+
   const clearBtn = document.getElementById('clearSearch');
   const resultsDiv = document.getElementById('searchResults');
-  
+
   if (searchTerm) {
     clearBtn.style.display = 'flex';
-    
+
     // Count matches
     let matchCount = 0;
     generationsData.forEach(gen => {
@@ -245,14 +288,23 @@ function handleSearch(value) {
         }
         if (member.children) {
           member.children.forEach(child => {
-            if (child.includes(searchTerm)) {
+            const childName = typeof child === 'string' ? child : child.name;
+            if (childName.includes(searchTerm)) {
               matchCount++;
+            }
+            // Check grandchildren
+            if (typeof child === 'object' && child.children) {
+              child.children.forEach(grandchild => {
+                if (grandchild.includes(searchTerm)) {
+                  matchCount++;
+                }
+              });
             }
           });
         }
       });
     });
-    
+
     if (matchCount > 0) {
       resultsDiv.textContent = `تم العثور على ${matchCount} نتيجة`;
       resultsDiv.style.color = 'var(--color-primary)';
@@ -264,9 +316,9 @@ function handleSearch(value) {
     clearBtn.style.display = 'none';
     resultsDiv.textContent = '';
   }
-  
+
   renderTree();
-  
+
   // Auto-scroll to first match
   if (searchTerm) {
     setTimeout(() => {
@@ -290,17 +342,17 @@ function setupEventListeners() {
   document.getElementById('zoomIn').addEventListener('click', zoomIn);
   document.getElementById('zoomOut').addEventListener('click', zoomOut);
   document.getElementById('resetZoom').addEventListener('click', resetZoom);
-  
+
   // Expand/Collapse controls
   document.getElementById('expandAll').addEventListener('click', expandAll);
   document.getElementById('collapseAll').addEventListener('click', collapseAll);
-  
+
   // Search
   const searchInput = document.getElementById('searchInput');
   searchInput.addEventListener('input', (e) => handleSearch(e.target.value));
-  
+
   document.getElementById('clearSearch').addEventListener('click', clearSearch);
-  
+
   // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey || e.metaKey) {
@@ -315,7 +367,7 @@ function setupEventListeners() {
         resetZoom();
       }
     }
-    
+
     // Escape to clear search
     if (e.key === 'Escape') {
       clearSearch();
