@@ -1,325 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Norah ❤️</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .particle {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(50px);
-                opacity: 0;
-            }
-        }
-
-        .container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-            padding: 20px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .name-top {
-            font-size: 3.5em;
-            font-weight: bold;
-            color: #FFB6C1;
-            text-shadow: 
-                0 0 20px rgba(255, 182, 193, 0.8),
-                0 0 40px rgba(255, 182, 193, 0.6),
-                3px 3px 6px rgba(0, 0, 0, 0.3);
-            animation: glow 2s ease-in-out infinite, bounce 2s ease-in-out infinite;
-            letter-spacing: 8px;
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                text-shadow: 
-                    0 0 20px rgba(255, 182, 193, 0.8),
-                    0 0 40px rgba(255, 182, 193, 0.6),
-                    3px 3px 6px rgba(0, 0, 0, 0.3);
-            }
-            50% {
-                text-shadow: 
-                    0 0 30px rgba(255, 182, 193, 1),
-                    0 0 60px rgba(255, 182, 193, 0.8),
-                    3px 3px 6px rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .heart-container {
-            position: relative;
-            width: 350px;
-            height: 320px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            10%, 30% {
-                transform: scale(1.05);
-            }
-            20%, 40% {
-                transform: scale(1);
-            }
-        }
-
-        .heart-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            filter: drop-shadow(0 10px 30px rgba(255, 0, 0, 0.5));
-        }
-
-        .heart-text {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.8em;
-            font-weight: bold;
-            color: white;
-            text-shadow: 
-                2px 2px 4px rgba(0, 0, 0, 0.7),
-                0 0 10px rgba(255, 255, 255, 0.5);
-            white-space: nowrap;
-            animation: textGlow 2s ease-in-out infinite;
-            z-index: 10;
-        }
-
-        @keyframes textGlow {
-            0%, 100% {
-                text-shadow: 
-                    2px 2px 4px rgba(0, 0, 0, 0.7),
-                    0 0 10px rgba(255, 255, 255, 0.5);
-            }
-            50% {
-                text-shadow: 
-                    2px 2px 4px rgba(0, 0, 0, 0.7),
-                    0 0 20px rgba(255, 255, 255, 0.9),
-                    0 0 30px rgba(255, 182, 193, 0.7);
-            }
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: white;
-            border-radius: 50%;
-            animation: sparkle 1.5s ease-in-out infinite;
-            pointer-events: none;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-
-        @keyframes sparkle {
-            0%, 100% {
-                opacity: 0;
-                transform: scale(0) rotate(0deg);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.5) rotate(180deg);
-            }
-        }
-
-        .sparkle:nth-child(3) { top: 5%; left: 15%; animation-delay: 0s; }
-        .sparkle:nth-child(4) { top: 15%; right: 15%; animation-delay: 0.3s; }
-        .sparkle:nth-child(5) { bottom: 25%; left: 10%; animation-delay: 0.6s; }
-        .sparkle:nth-child(6) { bottom: 15%; right: 10%; animation-delay: 0.9s; }
-        .sparkle:nth-child(7) { top: 40%; left: 5%; animation-delay: 1.2s; }
-        .sparkle:nth-child(8) { top: 50%; right: 5%; animation-delay: 1.5s; }
-        .sparkle:nth-child(9) { top: 30%; left: 50%; animation-delay: 0.4s; }
-        .sparkle:nth-child(10) { bottom: 35%; right: 50%; animation-delay: 1s; }
-
-        @media (max-width: 768px) {
-            .name-top {
-                font-size: 2.5em;
-                letter-spacing: 5px;
-            }
-
-            .heart-container {
-                width: 280px;
-                height: 260px;
-            }
-
-            .heart-text {
-                font-size: 1.5em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .name-top {
-                font-size: 2em;
-                letter-spacing: 3px;
-            }
-
-            .heart-container {
-                width: 230px;
-                height: 210px;
-            }
-
-            .heart-text {
-                font-size: 1.2em;
-            }
-        }
-    </style>
+    <title>شجرة العائلة - من علي بن أبي طالب إلى الجيل الحالي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="name-top">نونتي</div>
-        
-        <div class="heart-container">
-            <canvas class="heart-canvas"></canvas>
-            <div class="heart-text">طفلتي</div>
-            <div class="sparkle"></div>
-            <div class="sparkle"></div>
-            <div class="sparkle"></div>
-            <div class="sparkle"></div>
-            <div class="sparkle"></div>
-            <div class="sparkle"></div>
-            <div class="sparkle"></div>
-            <div class="sparkle"></div>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">🌳 شجرة العائلة السادة الاشراف ال محرق(جزء منها اولاد واحفاد ناصر محرق)</h1>
+                <p class="subtitle">حرفة هاشم</p>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن اسم في الشجرة">
+                    <button id="clearSearch" class="clear-btn" style="display: none;">✕</button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </header>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="control-group">
+                <button id="zoomIn" class="control-btn" title="تكبير">🔍 +</button>
+                <button id="zoomOut" class="control-btn" title="تصغير">🔍 -</button>
+                <button id="resetZoom" class="control-btn" title="إعادة تعيين">↺</button>
+            </div>
+            <div class="control-group">
+                <button id="expandAll" class="control-btn" title="توسيع الكل">▼ توسيع الكل</button>
+                <button id="collapseAll" class="control-btn" title="طي الكل">▲ طي الكل</button>
+            </div>
         </div>
+
+        <!-- Tree Container -->
+        <div class="tree-wrapper">
+            <div id="treeContainer" class="tree-container">
+                <div id="familyTree" class="family-tree"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="stat-item">
+                    <span class="stat-label">عدد الأجيال:</span>
+                    <span class="stat-value">40</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">إجمالي الأفراد:</span>
+                    <span class="stat-value">107</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">الجيل التاسع والثلاثون:</span>
+                    <span class="stat-value">17 فرد</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">الأحفاد:</span>
+                    <span class="stat-value">45 فرد</span>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <script>
-        const canvas = document.querySelector('.heart-canvas');
-        const ctx = canvas.getContext('2d');
-        const container = document.querySelector('.heart-container');
-        
-        function resizeCanvas() {
-            const width = container.offsetWidth;
-            const height = container.offsetHeight;
-            canvas.width = width;
-            canvas.height = height;
-            drawDottedHeart();
-        }
-
-        function isInsideHeart(x, y, scale) {
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2.5;
-            
-            const nx = (x - centerX) / scale;
-            const ny = -(y - centerY) / scale;
-            
-            const heart = Math.pow(nx * nx + ny * ny - 1, 3) - nx * nx * ny * ny * ny;
-            return heart <= 0;
-        }
-
-        function drawDottedHeart() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            const scale = canvas.width / 5;
-            const dotSize = 4;
-            const spacing = 8;
-            
-            const colors = ['#ff0000', '#ff1a1a', '#ff3333', '#cc0000', '#e60000'];
-            
-            for (let y = 0; y < canvas.height; y += spacing) {
-                for (let x = 0; x < canvas.width; x += spacing) {
-                    if (isInsideHeart(x, y, scale)) {
-                        const colorIndex = Math.floor(Math.random() * colors.length);
-                        ctx.fillStyle = colors[colorIndex];
-                        
-                        ctx.beginPath();
-                        ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
-            }
-        }
-
-        function animateDots() {
-            drawDottedHeart();
-        }
-
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        
-        setInterval(animateDots, 2000);
-
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            document.body.appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 7000);
-        }
-
-        setInterval(createParticle, 500);
-        
-        for (let i = 0; i < 10; i++) {
-            setTimeout(createParticle, i * 200);
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
