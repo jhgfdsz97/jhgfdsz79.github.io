@@ -44,7 +44,6 @@ const generationsData = [
   {
     generation: 39,
     members: [
-      { name: "هاشم", children: [] },
       { name: "خاتمة", children: ["عبدالرحمن", { name: "هديل", children: ["راكان", "ملك"] }, "وليد", "فاطمة", "عائشة", "نورة", "رنيم"] },
       { name: "صفية", children: ["عبدالرحمن", "احمد", "ماجدة", "تذكار", "بسام"] },
       { name: "كاملة", children: [] },
@@ -59,7 +58,8 @@ const generationsData = [
       { name: "احمد", children: [] },
       { name: "انصاف", children: ["حسن", "ناصر"] },
       { name: "باسمة", children: ["ريمان", "يسر"] },
-      { name: "سامي", children: [] }
+      { name: "سامي", children: [] },
+      { name: "هاشم", children: [] }
     ]
   }
 ];
